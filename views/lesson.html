@@ -1,0 +1,9 @@
+<p>{{name}}</p>
+<p>Peanuts</p>
+
+{{#each entries}}
+  <a href="/classroom/{{classroom_id}}/{{lesson_id}}/{{id}}">
+    <p>{{title}}</p>
+  </a>
+  <p>{{note}}</p>
+{{/each}}

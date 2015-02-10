@@ -33,6 +33,17 @@ app.get('/about', function(req, res) {
 	res.render('about', {title:"About Me"});
 });
 
+app.get('/classroom/:classroom_id/:lesson_id', function(req, res) {
+  console.log(req.params.classroom_id)
+  var lesson = danceEngine.getLessonEntry(req.params.lesson_id);
+  res.render('lesson', {
+    name: lesson.name,
+    classroom_id: 0,
+    lesson_id: lesson.id,
+    entries: danceEngine.getLessonVideos(req.params.lesson_id),
+  })
+});
+
 app.get('/classroom/new', function(req, res) {
   res.render('new_classroom');
 });
@@ -43,18 +54,16 @@ app.post('/classroom/new', function(req, res) {
   res.redirect('/')
 });
 
+
 app.get('/classroom/:id', function(req, res) {
   var classroom = danceEngine.getClassroomEntry(req.params.id);
-  var lessons = danceEngine.getClassroomLessons(req.params.id);
   res.render('classroom',{
-    id:classroom.id, 
+    classroom_id:classroom.id, 
     name:classroom.name, 
     secret:classroom.secret, 
-    lessons: lessons,
+    lessons: danceEngine.getClassroomLessons(req.params.id),
   });
 });
 
-app.get('/classroom/:classroom_id/:entry_id', function(req, res) {
 
-})
 app.listen(3000);

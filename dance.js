@@ -30,20 +30,19 @@ var lessons = [ {
     name: 'Second Lesson',
   }];
 
-var entries = [{
+var videos = [{
       id: 0,
       lesson_id: 0,
       title: 'Intro and Ranks',
       note: 'About Intro and Ranks of ballet',
     }, {
       id: 1,
-      lesson_id: 0;
+      lesson_id: 0,
       title: 'Corps',
       note: 'About the Corps de Ballet',
-    }]
+  }]
 
 exports.getClassrooms = function() {
-  console.log(classrooms);
 	return classrooms;
 }
 
@@ -67,19 +66,29 @@ exports.getLessons = function() {
   return lessons;
 };
 
-exports.getClassroomLessons = function(classroom_id) {
-  function matchLesson(classroom) {
-    return lesson.classroom_id == classroom_id
+exports.getClassroomLessons = function(class_id) {
+  function matchLesson(lesson) {
+    return lesson.classroom_id == class_id
   }
-  var lesson = classrooms.filter(matchClassroom)[0];
-  console.log(lesson);
-  return lesson;
+  return lessons.filter(matchLesson);
 }
 
 exports.getLessonEntry = function(lesson_id) {
   for(var i=0; i<lessons.length; i++) {
-    if(lessons[i].id == id) {
+    if(lessons[i].id == lesson_id) {
       return lessons[i];
     }
   }  
+}
+
+exports.getVideos = function() {
+  return videos;
+}
+
+exports.getLessonVideos = function(lesson_id) {
+  console.log("going to find videos")
+  function matchVideo(video) {
+    return video.lesson_id == lesson_id;
+  };
+  return videos.filter(matchVideo);
 }
